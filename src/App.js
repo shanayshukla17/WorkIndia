@@ -1,23 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import ItemList from './component/ItemList';
+import AddItemForm from './component/Additems';
 
 function App() {
+  const [AddForm, setAddForm] = useState(false);
+  const [ItemList, setItemList] = useState(true);
+
+  const handleAddForm = () => {
+    setAddForm(true);
+    setItemList(false);
+  };
+
+  const handleItemList = () => {
+    setAddForm(false);
+    setItemList(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="app">
+      <header>
+        <button onClick={handleAddForm}>Add Item</button>
+        <button onClick={handleItemList}>View Items</button>
       </header>
+      {AddForm && <AddItemForm />}
+      {ItemList && <ItemList />}
     </div>
   );
 }
